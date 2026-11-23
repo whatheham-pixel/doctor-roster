@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="醫師排班">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <title>醫師排班</title>
+  <style>
+    /* 滿版，不留白邊 */
+    html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #eef1f4; }
+    .container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    /* 往上推 50px，把 Google Apps Script 的提示列藏到螢幕外（做法同藥局系統） */
+    iframe {
+      position: absolute; top: -50px; left: 0;
+      width: 100%; height: calc(100% + 50px);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <iframe src="https://script.google.com/macros/s/AKfycbyjPdLouo1tbW_KNKZV4fm_lgzhKF1dBoQiYnlD58yqEI-Qcu8RpV_xDxHbGguBLEoZ3g/exec"
+            title="醫師排班" allow="clipboard-write"></iframe>
+  </div>
+  <script>
+    // Service Worker：讓 Android 也能出現「安裝」提示
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+  </script>
+</body>
+</html>
